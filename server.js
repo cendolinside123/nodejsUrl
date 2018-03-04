@@ -32,8 +32,16 @@ app.use(function (req,res,next) {
 require("./routes/tblUser")(app);
 require("./routes/tblAkun")(app);
 require("./routes/tblJurnal")(app);
-app.listen(3100);
-console.log("port web service : 3100");
+
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 3100;
+var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+
+//app.listen(3100);
+//console.log("port web service : 3100");
+
+server.listen(server_port, server_ip_address, function () {
+  console.log( "Listening on " + server_ip_address + ", port " + server_port )
+});
 
 
 app.use(express.static(path.join(__dirname, 'public')));
