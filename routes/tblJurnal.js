@@ -30,7 +30,7 @@ module.exports = function(app){
 		connection.query(sql,function(err,rows){
 			if(rows.affectedRows)
 			{
-				var sql2 = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE kdJurnal = '"+ rows.insertId +"'";
+				var sql2 = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE kdJurnal = '"+ rows.insertId +"'";
 				connection.query(sql2,function(err,rows){
 					if(!err && rows.length > 0) 
 					{
@@ -47,7 +47,7 @@ module.exports = function(app){
 		});
 	});
 	app.get("/tblJurnal",function(req,res){
-		var sql = "SELECT kdJurnal, nmJurnal, kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun";
+		var sql = "SELECT kdJurnal, nmJurnal, kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun";
 		connection.query(sql,function(err,rows){
 			if(!err && rows.length > 0) 
 			{
@@ -62,7 +62,7 @@ module.exports = function(app){
 	});
 	app.get("/tblJurnal/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
-		var sql = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"'";
+		var sql = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"'";
 		connection.query(sql,function(err,rows){
 			if(!err && rows.length > 0) 
 			{
@@ -78,7 +78,7 @@ module.exports = function(app){
 	app.get("/tblJurnal/:jenis/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
 		var jenis = req.params.jenis;
-		var sql = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblAkun.TipeAkun = '"+jenis+"'";
+		var sql = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblakun.TipeAkun = '"+jenis+"'";
 		connection.query(sql,function(err,rows){
 			if(!err && rows.length > 0) 
 			{
@@ -94,7 +94,7 @@ module.exports = function(app){
 	app.get("/tblJurnal/BulanIni/:jenis/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
 		var jenis = req.params.jenis;
-		var sql = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblAkun.TipeAkun = '"+jenis+"' AND MONTH(tgl) = MONTH(CURRENT_DATE()) AND YEAR(tgl) = YEAR(CURRENT_DATE())";
+		var sql = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblakun.TipeAkun = '"+jenis+"' AND MONTH(tgl) = MONTH(CURRENT_DATE()) AND YEAR(tgl) = YEAR(CURRENT_DATE())";
 		connection.query(sql,function(err,rows){
 			if(!err && rows.length > 0) 
 			{
@@ -112,8 +112,8 @@ module.exports = function(app){
 		var pemasukan = 0;
 		var pengeluaran = 0;
 		//var jenis = req.params.jenis;
-		var sql = "SELECT SUM(harga) AS harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblAkun.TipeAkun = 'pemasukan' AND MONTH(tgl) = MONTH(CURRENT_DATE()) AND YEAR(tgl) = YEAR(CURRENT_DATE())";
-		var sql2 = "SELECT SUM(harga) AS harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblAkun.TipeAkun = 'pengeluaran' AND MONTH(tgl) = MONTH(CURRENT_DATE()) AND YEAR(tgl) = YEAR(CURRENT_DATE())";
+		var sql = "SELECT SUM(harga) AS harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblakun.TipeAkun = 'pemasukan' AND MONTH(tgl) = MONTH(CURRENT_DATE()) AND YEAR(tgl) = YEAR(CURRENT_DATE())";
+		var sql2 = "SELECT SUM(harga) AS harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblakun.TipeAkun = 'pengeluaran' AND MONTH(tgl) = MONTH(CURRENT_DATE()) AND YEAR(tgl) = YEAR(CURRENT_DATE())";
 		connection.query(sql,function(err,rows){
 			if(!err && rows.length > 0) 
 			{
@@ -150,7 +150,7 @@ module.exports = function(app){
 		var tgl = postBody.tgl;
 		var format = convertDate(tgl);
 		
-		var sql = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblAkun.TipeAkun = '"+jenis+"' AND tgl = '"+format+"'";
+		var sql = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND tblakun.TipeAkun = '"+jenis+"' AND tgl = '"+format+"'";
 		connection.query(sql,function(err,rows){
 			if(!err && rows.length > 0) 
 			{
@@ -174,7 +174,7 @@ module.exports = function(app){
 			if(waktu == 'bulan ini')
 			{
 				console.log("bulanan");
-				var sql = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE tblAkun.TipeAkun = '"+jenis+"' AND MONTH(tgl) = MONTH(CURRENT_DATE()) AND YEAR(tgl) = YEAR(CURRENT_DATE())";
+				var sql = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE tblakun.TipeAkun = '"+jenis+"' AND MONTH(tgl) = MONTH(CURRENT_DATE()) AND YEAR(tgl) = YEAR(CURRENT_DATE())";
 				connection.query(sql,function(err,rows){
 					if(!err && rows.length > 0) 
 					{
@@ -190,7 +190,7 @@ module.exports = function(app){
 			else if(waktu == 'tahun ini')
 			{
 				console.log("tahunan");
-				var sql = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE tblAkun.TipeAkun = '"+jenis+"' AND YEAR(tgl) = YEAR(CURRENT_DATE()) ORDER BY MONTH(tgl)";
+				var sql = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE tblakun.TipeAkun = '"+jenis+"' AND YEAR(tgl) = YEAR(CURRENT_DATE()) ORDER BY MONTH(tgl)";
 				connection.query(sql,function(err,rows){
 					if(!err && rows.length > 0) 
 					{
@@ -206,7 +206,7 @@ module.exports = function(app){
 			else if(waktu == 'minggu ini')
 			{
 				console.log("minguan");
-				var sql = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE tblAkun.TipeAkun = '"+jenis+"' AND YEARWEEK(DATE(tgl), 1) = YEARWEEK(CURRENT_DATE(), 1) ORDER BY MONTH(tgl)";
+				var sql = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE tblakun.TipeAkun = '"+jenis+"' AND YEARWEEK(DATE(tgl), 1) = YEARWEEK(CURRENT_DATE(), 1) ORDER BY MONTH(tgl)";
 				connection.query(sql,function(err,rows){
 					if(!err && rows.length > 0) 
 					{
@@ -231,7 +231,7 @@ module.exports = function(app){
 	app.get("/tblJurnal/GetSelected/:kdJurnal/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
 		var kdJurnal = req.params.kdJurnal;
-		var sql = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND kdJurnal = '"+kdJurnal+"'";
+		var sql = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE jurnal_harian.kdUser = '"+ kdUser +"' AND kdJurnal = '"+kdJurnal+"'";
 		connection.query(sql,function(err,rows){
 			if(!err && rows.length > 0) 
 			{
@@ -248,7 +248,7 @@ module.exports = function(app){
 	app.get("/tblJurnal/:jenis/:kdUser",function(req,res){
 		var kdJurnal = req.params.kdJurnal;
 		var kdUser = req.params.kdUser;
-		var sql = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE kdJurnal = '"+ kdJurnal +"' AND jurnal_harian.kdUser = '"+ kdUser +"'";
+		var sql = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE kdJurnal = '"+ kdJurnal +"' AND jurnal_harian.kdUser = '"+ kdUser +"'";
 		connection.query(sql,function(err,rows){
 			if(!err && rows.length > 0) 
 			{
@@ -273,7 +273,7 @@ module.exports = function(app){
 		var format = convertDate(tgl);
 		
 		var sql = "UPDATE jurnal_harian SET nmJurnal = '" + nmJurnal + "', kdAkun = '"+ kdAkun +"', tgl = '"+ format +"', harga = '"+ harga +"' WHERE kdJurnal = '"+ kdJurnal +"' AND kdUser = '"+ kdUser +"'";
-		var sql2 = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE kdJurnal = '"+ kdJurnal +"' AND jurnal_harian.kdUser = '"+ kdUser +"'";
+		var sql2 = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE kdJurnal = '"+ kdJurnal +"' AND jurnal_harian.kdUser = '"+ kdUser +"'";
 		connection.query(sql,function(err,rows){
 			if(rows.affectedRows)
 			{
@@ -296,7 +296,7 @@ module.exports = function(app){
 		var kdJurnal = req.params.kdJurnal;
 		var kdUser = req.params.kdUser;
 		var sql = "DELETE FROM jurnal_harian WHERE kdJurnal = '"+ kdJurnal +"' AND kdUser = '"+ kdUser +"'";
-		var sql2 = "SELECT kdJurnal, nmJurnal, tblAkun.kdAkun AS kdAkun, tblAkun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblAkun ON jurnal_harian.kdAkun = tblAkun.kdAkun WHERE kdJurnal = '"+ kdJurnal +"' AND jurnal_harian.kdUser = '"+ kdUser +"'";
+		var sql2 = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE kdJurnal = '"+ kdJurnal +"' AND jurnal_harian.kdUser = '"+ kdUser +"'";
 		connection.query(sql2,function(err,rows){
 			if(rows.length > 0) 
 			{
