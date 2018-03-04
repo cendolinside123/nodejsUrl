@@ -242,7 +242,7 @@ module.exports = function(app){
 			if(!err && rows.length > 0) 
 			{
 				//data['result'] = rows;
-				data = {"kdJurnal":rows[0]["kdJurnal"],"nmJurnal":rows[0]["nmJurnal"],"kdAkun":rows[0]["kdAkun"],"nmAkun":rows[0]["nmAkun"],"kdUser":rows[0]["kdUser"],"tgl":convertDate(rows[0]["tgl"]),"harga":rows[0]["harga"]};
+				data = {"kdJurnal":rows[0]["kdJurnal"],"nmJurnal":rows[0]["nmJurnal"],"kdAkun":rows[0]["kdAkun"],"nmAkun":rows[0]["nmAkun"],"kdUser":rows[0]["kdUser"],"tgl":rows[0]["tgl"],"harga":rows[0]["harga"]};
 				res.json(data);
 			} 
 			else{
@@ -276,7 +276,7 @@ module.exports = function(app){
 		var tgl = postBody.tgl;
 		var harga = postBody.harga;
 		var nmJurnal = postBody.nmJurnal;
-		var format = convertDate2(tgl);
+		var format = convertDate(tgl);
 		
 		var sql = "UPDATE jurnal_harian SET nmJurnal = '" + nmJurnal + "', kdAkun = '"+ kdAkun +"', tgl = '"+ format +"', harga = '"+ harga +"' WHERE kdJurnal = '"+ kdJurnal +"' AND kdUser = '"+ kdUser +"'";
 		var sql2 = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE kdJurnal = '"+ kdJurnal +"' AND jurnal_harian.kdUser = '"+ kdUser +"'";
