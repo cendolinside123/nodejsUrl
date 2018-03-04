@@ -41,10 +41,10 @@ function handleDisconnected()
 	
 	connection.on('error', function(err) {
 		console.log('db error', err);
-		if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
+		if(err.code == 'PROTOCOL_CONNECTION_LOST') { 
 		  handleDisconnected();                         
 		}
-		else if(err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR')
+		else if(err.code == 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR')
 		{
 			connection.release();
 		}
