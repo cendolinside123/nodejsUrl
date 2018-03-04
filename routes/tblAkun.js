@@ -4,10 +4,10 @@ var mysql = require('mysql');
 var data = {};
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-	database: "projectuas_android"
+    host: 'bgabgb3vi-mysql.services.clever-cloud.com',
+    user: 'uawpqbdrl3llqjpt',
+    password: 'Dlff4WOTqvDqpTfu3a5',
+	database: "bgabgb3vi"
 });
 module.exports = function(app){
 	app.post("/tblAkun",function(req,res){

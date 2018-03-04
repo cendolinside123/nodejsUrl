@@ -10,10 +10,10 @@ var path = require('path');
 var app = express();
 
 var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-	database: "projectuas_android"
+    host: 'bgabgb3vi-mysql.services.clever-cloud.com',
+    user: 'uawpqbdrl3llqjpt',
+    password: 'Dlff4WOTqvDqpTfu3a5',
+	database: "bgabgb3vi"
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
