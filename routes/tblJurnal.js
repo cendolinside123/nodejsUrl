@@ -9,6 +9,12 @@ function convertDate(inputFormat) {
   return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate() + 1)].join('-');
 }
 
+function convertDate2(inputFormat) {
+  function pad(s) { return (s < 10) ? '0' + s : s; }
+  var d = new Date(inputFormat);
+  return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
+}
+
 var connection = mysql.createConnection({
     host: 'bgabgb3vi-mysql.services.clever-cloud.com',
     user: 'uawpqbdrl3llqjpt',
@@ -270,7 +276,7 @@ module.exports = function(app){
 		var tgl = postBody.tgl;
 		var harga = postBody.harga;
 		var nmJurnal = postBody.nmJurnal;
-		var format = convertDate(tgl);
+		var format = convertDate2(tgl);
 		
 		var sql = "UPDATE jurnal_harian SET nmJurnal = '" + nmJurnal + "', kdAkun = '"+ kdAkun +"', tgl = '"+ format +"', harga = '"+ harga +"' WHERE kdJurnal = '"+ kdJurnal +"' AND kdUser = '"+ kdUser +"'";
 		var sql2 = "SELECT kdJurnal, nmJurnal, tblakun.kdAkun AS kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun WHERE kdJurnal = '"+ kdJurnal +"' AND jurnal_harian.kdUser = '"+ kdUser +"'";
