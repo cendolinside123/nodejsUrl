@@ -86,7 +86,7 @@ module.exports = function(app){
 				res.json(data);
 			} 
 			else{
-				data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0}];
+				data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0,"error":err}];
 				res.json(data);
 			}
 		});
@@ -102,7 +102,7 @@ module.exports = function(app){
 				res.json(data);
 			} 
 			else{
-				data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0}];
+				data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0,"error":err}];
 				res.json(data);
 			}
 		});
@@ -158,7 +158,7 @@ module.exports = function(app){
 				res.json(data);
 			} 
 			else{
-				data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0}];
+				data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0,"error":err}];
 				res.json(data);
 			}
 		});
@@ -182,7 +182,7 @@ module.exports = function(app){
 						res.json(data);
 					} 
 					else{
-						data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0}];
+						data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0,"error":err}];
 						res.json(data);
 					}
 				});
@@ -198,7 +198,7 @@ module.exports = function(app){
 						res.json(data);
 					} 
 					else{
-						data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0}];
+						data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0,"error":err}];
 						res.json(data);
 					}
 				});
@@ -214,7 +214,7 @@ module.exports = function(app){
 						res.json(data);
 					} 
 					else{
-						data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0}];
+						data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0,"error":err}];
 						res.json(data);
 					}
 				});
@@ -240,7 +240,7 @@ module.exports = function(app){
 				res.json(data);
 			} 
 			else{
-				data = {"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0};
+				data = {"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0,"error":err};
 				res.json(data);
 			}
 		});
@@ -255,7 +255,7 @@ module.exports = function(app){
 				res.json(rows[0]);
 			} 
 			else{
-				data = {"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0};
+				data = {"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0,"error":err};
 				res.json(data);
 			}
 		});
