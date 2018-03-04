@@ -34,7 +34,12 @@ require("./routes/tblAkun")(app);
 require("./routes/tblJurnal")(app);
 require("./routes/test")(app);
 
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 3100;
+app.get("/",function(req,res){
+	res.json("berhasil");
+});
+
+
+var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 
 //app.listen(3100);
