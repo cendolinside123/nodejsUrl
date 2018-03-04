@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 const saltRounds = 10;
 //const myPlaintextPassword = 's0/\/\P4$$w0rD';
 //const someOtherPlaintextPassword = 'not_bacon';
