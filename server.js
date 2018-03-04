@@ -44,7 +44,7 @@ function handleDisconnected()
 		if(err.code === 'PROTOCOL_CONNECTION_LOST') { 
 		  handleDisconnected();                         
 		}
-		else if(err.code() === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR')
+		else if(err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR')
 		{
 			connection.release();
 		}
