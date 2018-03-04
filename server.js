@@ -46,7 +46,7 @@ function handleDisconnected()
 		}
 		else if(err.code == 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR')
 		{
-			connection.release();
+			connection.end();
 		}
 		else{                                      
 		  throw err;                                  
