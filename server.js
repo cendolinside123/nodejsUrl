@@ -40,10 +40,10 @@ var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 //app.listen(3100);
 //console.log("port web service : 3100");
 
-/*server.listen(server_port, server_ip_address, function () {
+app.listen(server_port, server_ip_address, function () {
   console.log( "Listening on " + server_ip_address + ", port " + server_port )
-});*/
-app.listen(server_port);
+});
+//app.listen(server_port);
 
 
 app.use(express.static(path.join(__dirname, 'public')));
