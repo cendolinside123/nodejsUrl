@@ -35,6 +35,7 @@ function handleDisconnected()
 		if(err)
 		{
 			console.log('error when connecting to db:', err);
+			connection.connect();
 			setTimeout(handleDisconnected, 2000);
 		}
 	});
