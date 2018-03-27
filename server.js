@@ -9,7 +9,7 @@ var path = require('path');
 
 var app = express();
 
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
     host: 'bgabgb3vi-mysql.services.clever-cloud.com',
     user: 'uawpqbdrl3llqjpt',
     password: 'Dlff4WOTqvDqpTfu3a5',
@@ -45,10 +45,10 @@ function handleDisconnected()
 		if(err.code == 'PROTOCOL_CONNECTION_LOST') { 
 		  handleDisconnected();                         
 		}
-		else if(err.code == 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR')
+		/*else if(err.code == 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR')
 		{
 			connection.connect();
-		}
+		}*/
 		else{                                      
 		  throw err;                                  
 		}

@@ -3,7 +3,7 @@ var bcrypt = require('bcryptjs');
 const saltRounds = 10;
 //const myPlaintextPassword = 's0/\/\P4$$w0rD';
 //const someOtherPlaintextPassword = 'not_bacon';
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
     host: 'bgabgb3vi-mysql.services.clever-cloud.com',
     user: 'uawpqbdrl3llqjpt',
     password: 'Dlff4WOTqvDqpTfu3a5',
@@ -32,11 +32,13 @@ module.exports = function(app){
 								res.json(err);
 							}
 						});
+						connection.end();
 					}
 					else{
 						res.json(err);
 					}
 				});
+				connection.end();
 			});
 		});
 		
@@ -53,6 +55,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblUser/:id",function(req,res){
 		var id = req.params.id;
@@ -66,6 +69,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
+		connection.end();
 	});
 	app.post("/tblUser/login",function(req,res){
 		var postBody = req.body;
@@ -91,7 +95,7 @@ module.exports = function(app){
 							}
 						});
 						//res.json(ress);
-						
+						connection.end();
 					}
 					else{
 						res.json([]);
@@ -104,6 +108,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
+		connection.end();
 	});
 	app.post("/tblUser/ChangePassword",function(req,res){
 		var postBody = req.body;
@@ -141,6 +146,7 @@ module.exports = function(app){
 										res.json(err);
 									}
 								});
+								connection.end();
 							});
 						});
 						
@@ -157,6 +163,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
+		connection.end();
 	});
 	app.post("/tblUser/UpdateNama",function(req,res){
 		var postBody = req.body;
@@ -182,5 +189,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
+		connection.end();
 	});
+	//connection.end();
 }

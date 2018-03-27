@@ -15,7 +15,7 @@ function convertDate2(inputFormat) {
   return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-');
 }
 
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
     host: 'bgabgb3vi-mysql.services.clever-cloud.com',
     user: 'uawpqbdrl3llqjpt',
     password: 'Dlff4WOTqvDqpTfu3a5',
@@ -41,16 +41,21 @@ module.exports = function(app){
 					if(!err && rows.length > 0) 
 					{
 						res.json(rows[0]);
+						//connection.end();
 					} 
 					else{
 						res.json(err);
+						//connection.end();
 					}
 				});
+				connection.end();
 			}
 			else{
 				res.json(err);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblJurnal",function(req,res){
 		var sql = "SELECT kdJurnal, nmJurnal, kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun";
@@ -59,12 +64,15 @@ module.exports = function(app){
 			{
 				data['result'] = rows;
 				res.json(data);
+				//connection.end();
 			} 
 			else{
 				data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0}];
 				res.json(data);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblJurnal/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -74,12 +82,15 @@ module.exports = function(app){
 			{
 				data['result'] = rows;
 				res.json(data);
+				//connection.end();
 			} 
 			else{
 				data['result'] = [{"kdAkun":0,"nmAkun":"kosong","nmJurnal":"kosong","harga":0}];
 				res.json(data);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblJurnal/:jenis/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -96,6 +107,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblJurnal/BulanIni/:jenis/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -112,6 +124,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblJurnal/Sum/BulanIni/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -141,12 +154,14 @@ module.exports = function(app){
 						res.json(data1);
 					}
 				});
+				connection.end();
 			} 
 			else{
 				data1 = {"pemasukan":0,"pengeluaran":0};
 				res.json(data);
 			}
 		});
+		connection.end();
 	}); 
 	app.post("/tblJurnal/GetAll/:jenis/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -168,6 +183,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
+		connection.end();
 	});
 	app.post("/tblJurnal/GetRecord/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -192,6 +208,7 @@ module.exports = function(app){
 						res.json(data);
 					}
 				});
+				connection.end();
 			}
 			else if(waktu == 'tahun ini')
 			{
@@ -208,6 +225,7 @@ module.exports = function(app){
 						res.json(data);
 					}
 				});
+				connection.end();
 			}
 			else if(waktu == 'minggu ini')
 			{
@@ -224,6 +242,7 @@ module.exports = function(app){
 						res.json(data);
 					}
 				});
+				connection.end();
 			}
 		}
 		else{
@@ -250,6 +269,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblJurnal/:jenis/:kdUser",function(req,res){
 		var kdJurnal = req.params.kdJurnal;
@@ -265,6 +285,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
+		connection.end();
 	});
 	app.put("/tblJurnal/:kdJurnal/:kdUser",function(req,res){
 		
@@ -297,6 +318,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
+		connection.end();
 	});
 	app.delete("/tblJurnal/:kdJurnal/:kdUser",function(req,res){
 		var kdJurnal = req.params.kdJurnal;
@@ -320,5 +342,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
+		connection.end();
 	});
+	//connection.end();
 }

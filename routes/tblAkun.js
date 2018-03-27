@@ -3,7 +3,7 @@ var mysql = require('mysql');
 //const saltRounds = 10;
 var data = {};
 
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
     host: 'bgabgb3vi-mysql.services.clever-cloud.com',
     user: 'uawpqbdrl3llqjpt',
     password: 'Dlff4WOTqvDqpTfu3a5',
@@ -26,16 +26,20 @@ module.exports = function(app){
 					if(!err && rows.length > 0) 
 					{
 						res.json(rows[0]);
+						//connection.end();
 					} 
 					else{
 						res.json(err);
+						//connection.end();
 					}
 				});
 			}
 			else{
 				res.json(err);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblAkun",function(req,res){
 		var sql = "SELECT kdAkun, nmAkun, kdUser, TipeAkun FROM tblakun";
@@ -44,11 +48,14 @@ module.exports = function(app){
 			{
 				data['result'] = rows;
 				res.json(data);
+				//connection.end();
 			} 
 			else{
 				res.json(err);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblAkun/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -59,12 +66,15 @@ module.exports = function(app){
 				
 				data['result'] = rows;
 				res.json(data);
+				//connection.end();
 			} 
 			else{
 				data['result'] = [{"kdAkun":0,"nmAkun":"kosong"}];
 				res.json(data);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblAkun/:tipe/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -76,12 +86,15 @@ module.exports = function(app){
 				data['result'] = rows;
 				res.json(data);
 				//res.json(rows);
+				//connection.end();
 			} 
 			else{
 				data['result'] = [{"kdAkun":0,"nmAkun":"kosong"}];
 				res.json(data);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblAkun/GetSelected/:kdAkun/:kdUser",function(req,res){
 		var kdAkun = req.params.kdAkun;
@@ -91,12 +104,15 @@ module.exports = function(app){
 			if(!err && rows.length > 0) 
 			{
 				res.json(rows[0]);
+				//connection.end();
 			} 
 			else{
 				data = {"kdAkun":0,"nmAkun":"kosong"};
 				res.json(data);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.get("/tblAkun/:tipe/:kdAkun/:kdUser",function(req,res){
 		var kdAkun = req.params.kdAkun;
@@ -107,12 +123,15 @@ module.exports = function(app){
 			if(!err && rows.length > 0) 
 			{
 				res.json(rows[0]);
+				//connection.end();
 			} 
 			else{
 				data = {"kdAkun":0,"nmAkun":"kosong"};
 				res.json(data);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.put("/tblAkun/:kdAkun/:kdUser",function(req,res){
 		
@@ -132,16 +151,21 @@ module.exports = function(app){
 					if(!err && rows.length > 0) 
 					{
 						res.json(rows[0]);
+						//connection.end();
 					} 
 					else{
 						res.json(err);
+						//connection.end();
 					}
 				});
+				connection.end();
 			}
 			else{
 				res.json(err);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
 	app.delete("/tblAkun/:kdAkun/:kdUser",function(req,res){
 		var kdAkun = req.params.kdAkun;
@@ -155,15 +179,21 @@ module.exports = function(app){
 					if(!err) 
 					{
 						res.json(rows);
+						//connection.end();
 					} 
 					else{
 						res.json(err);
+						//connection.end();
 					}
 				});
+				connection.end();
 			} 
 			else{
 				res.json(err);
+				//connection.end();
 			}
 		});
+		connection.end();
 	});
+	//connection.end();
 }
