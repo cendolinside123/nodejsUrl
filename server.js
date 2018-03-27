@@ -29,7 +29,7 @@ app.use(function (req,res,next) {
     next();
 });
 
-function handleDisconnected()
+/*function handleDisconnected()
 {
 	connection.createPool(function(err){
 		if(err)
@@ -45,16 +45,16 @@ function handleDisconnected()
 		if(err.code == 'PROTOCOL_CONNECTION_LOST') { 
 		  handleDisconnected();                         
 		}
-		/*else if(err.code == 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR')
-		{
-			connection.connect();
-		}*/
+		//else if(err.code == 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR')
+		//{
+		//	connection.connect();
+		//}
 		else{                                      
 		  throw err;                                  
 		}
 	});
 }
-handleDisconnected();
+handleDisconnected();*/
 
 require("./routes/tblUser")(app);
 require("./routes/tblAkun")(app);
@@ -85,9 +85,9 @@ process.on('uncaughtException', (err) => {
 });
 
 
-/*setTimeout(() => {
+setTimeout(() => {
   console.log('This will still run.');
-}, 500);*/
+}, 500);
 
 //nonexistentFunc();
 
