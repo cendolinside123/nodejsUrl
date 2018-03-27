@@ -31,7 +31,7 @@ app.use(function (req,res,next) {
 
 function handleDisconnected()
 {
-	connection.connect(function(err){
+	connection.createPool(function(err){
 		if(err)
 		{
 			console.log('error when connecting to db:', err);
