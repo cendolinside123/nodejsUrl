@@ -39,7 +39,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblAkun",function(req,res){
 		var sql = "SELECT kdAkun, nmAkun, kdUser, TipeAkun FROM tblakun";
@@ -55,7 +55,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblAkun/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -74,7 +74,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblAkun/:tipe/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -94,7 +94,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblAkun/GetSelected/:kdAkun/:kdUser",function(req,res){
 		var kdAkun = req.params.kdAkun;
@@ -112,7 +112,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblAkun/:tipe/:kdAkun/:kdUser",function(req,res){
 		var kdAkun = req.params.kdAkun;
@@ -131,7 +131,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.put("/tblAkun/:kdAkun/:kdUser",function(req,res){
 		
@@ -165,7 +165,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.delete("/tblAkun/:kdAkun/:kdUser",function(req,res){
 		var kdAkun = req.params.kdAkun;
@@ -193,7 +193,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	//connection.end();
 }

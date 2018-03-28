@@ -38,7 +38,7 @@ module.exports = function(app){
 						res.json(err);
 					}
 				});
-				connection.end();
+				//connection.end();
 			});
 		});
 		
@@ -55,7 +55,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblUser/:id",function(req,res){
 		var id = req.params.id;
@@ -69,7 +69,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.post("/tblUser/login",function(req,res){
 		var postBody = req.body;
@@ -95,7 +95,7 @@ module.exports = function(app){
 							}
 						});
 						//res.json(ress);
-						connection.end();
+						//connection.end();
 					}
 					else{
 						res.json([]);
@@ -108,7 +108,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.post("/tblUser/ChangePassword",function(req,res){
 		var postBody = req.body;
@@ -146,7 +146,7 @@ module.exports = function(app){
 										res.json(err);
 									}
 								});
-								connection.end();
+								//connection.end();
 							});
 						});
 						
@@ -163,7 +163,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.post("/tblUser/UpdateNama",function(req,res){
 		var postBody = req.body;
@@ -189,7 +189,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	//connection.end();
 }

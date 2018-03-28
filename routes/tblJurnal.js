@@ -55,7 +55,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblJurnal",function(req,res){
 		var sql = "SELECT kdJurnal, nmJurnal, kdAkun, tblakun.nmAkun AS nmAkun, jurnal_harian.kdUser, tgl, harga FROM jurnal_harian LEFT JOIN tblakun ON jurnal_harian.kdAkun = tblakun.kdAkun";
@@ -72,7 +72,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblJurnal/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -90,7 +90,7 @@ module.exports = function(app){
 				//connection.end();
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblJurnal/:jenis/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -107,7 +107,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblJurnal/BulanIni/:jenis/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -124,7 +124,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblJurnal/Sum/BulanIni/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -154,14 +154,14 @@ module.exports = function(app){
 						res.json(data1);
 					}
 				});
-				connection.end();
+				//connection.end();
 			} 
 			else{
 				data1 = {"pemasukan":0,"pengeluaran":0};
 				res.json(data);
 			}
 		});
-		connection.end();
+		//connection.end();
 	}); 
 	app.post("/tblJurnal/GetAll/:jenis/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -183,7 +183,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.post("/tblJurnal/GetRecord/:kdUser",function(req,res){
 		var kdUser = req.params.kdUser;
@@ -208,7 +208,7 @@ module.exports = function(app){
 						res.json(data);
 					}
 				});
-				connection.end();
+				//connection.end();
 			}
 			else if(waktu == 'tahun ini')
 			{
@@ -225,7 +225,7 @@ module.exports = function(app){
 						res.json(data);
 					}
 				});
-				connection.end();
+				//connection.end();
 			}
 			else if(waktu == 'minggu ini')
 			{
@@ -242,7 +242,7 @@ module.exports = function(app){
 						res.json(data);
 					}
 				});
-				connection.end();
+				//connection.end();
 			}
 		}
 		else{
@@ -269,7 +269,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.get("/tblJurnal/:jenis/:kdUser",function(req,res){
 		var kdJurnal = req.params.kdJurnal;
@@ -285,7 +285,7 @@ module.exports = function(app){
 				res.json(data);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.put("/tblJurnal/:kdJurnal/:kdUser",function(req,res){
 		
@@ -318,7 +318,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	app.delete("/tblJurnal/:kdJurnal/:kdUser",function(req,res){
 		var kdJurnal = req.params.kdJurnal;
@@ -342,7 +342,7 @@ module.exports = function(app){
 				res.json(err);
 			}
 		});
-		connection.end();
+		//connection.end();
 	});
 	//connection.end();
 }
